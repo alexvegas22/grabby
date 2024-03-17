@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "gui.h"
+#include "grab.h"
 
 char * version = "v0.0.1";
 char * name = "grabby";
@@ -29,9 +30,13 @@ main(int argc, char **argv)
     if (strncmp(argv[1], "gui", 3)==0){
       startGui();
     }
+    else {
+      printf("%s: urecognized option : %s\n", name, argv[1]);
+      return 1;
+    }
   }
   else{
-    printf("%s: No arguments provided\n", name);
+    getXimage();
   }
     return 0;
 }
