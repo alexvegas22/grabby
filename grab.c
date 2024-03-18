@@ -32,12 +32,11 @@ void getXimage() {
         XCloseDisplay(display);
         return;
     }
-
+    
     png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     if (!png_ptr) {
         fclose(fp);
         fprintf(stderr, "Error creating PNG write structure\n");
-        
         XCloseDisplay(display);
         return;
     }
@@ -47,13 +46,12 @@ void getXimage() {
         png_destroy_write_struct(&png_ptr, NULL);
         fclose(fp);
         fprintf(stderr, "Error creating PNG info structure\n");
-        
         XCloseDisplay(display);
         return;
     }
 
     png_init_io(png_ptr, fp);
-    png_set_IHDR(png_ptr, info_ptr, width, height, 8, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+    png_set_IHDR(png_ptr, info_ptr, width, height, 16, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
     png_write_info(png_ptr, info_ptr);
 
     png_bytep row_pointers[height];
