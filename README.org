@@ -1,1 +1,2 @@
 #+TITLE:Grabby
+Compile : gcc -o main main.c grab.c $(pkg-config --cflags gtk4) -lX11 -lpng $(pkg-config --libs gtk4)

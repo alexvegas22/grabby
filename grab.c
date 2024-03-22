@@ -2,6 +2,7 @@
 #include <X11/Xlib.h>
 #include <stdio.h>
 #include <png.h>
+#include <string.h>
 
 void getXimage() {
     Display *display = XOpenDisplay(NULL);
@@ -16,7 +17,9 @@ void getXimage() {
     int y = 0;
     Window root = RootWindow(display, DefaultScreen(display));
     XGetWindowAttributes(display, root, &attr);
-    width = attr.width, height = attr.height;
+    width = attr.width;
+    height = attr.height;
+    printf("Width: %i Height : %i\n", width, height);
     XImage *image = XGetImage(display, root, x, y, width, height, AllPlanes, ZPixmap);
     if (!image) {
         printf("XGetImage failed\n");
@@ -51,7 +54,8 @@ void getXimage() {
     }
 
     png_init_io(png_ptr, fp);
-    png_set_IHDR(png_ptr, info_ptr, width, height, 16, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+    png_set_IHDR(png_ptr, info_ptr, width, height, 16, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_ADAM7, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+    
     png_write_info(png_ptr, info_ptr);
 
     png_bytep row_pointers[height];
