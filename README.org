@@ -1,2 +1,5 @@
 #+TITLE:Grabby
+
+#+BEGIN_SRC C
 Compile : gcc -o main main.c grab.c $(pkg-config --cflags gtk4) -lX11 -lpng $(pkg-config --libs gtk4)
+#+END_SRC
